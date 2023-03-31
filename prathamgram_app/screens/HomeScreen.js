@@ -5,6 +5,7 @@ import Stories from '../components/home/Stories'
 import Post from '../components/home/Post'
 import { POSTS } from '../data/Posts'
 
+
 const HomeScreen = () => {
   return (
   <SafeAreaView style={styles.container}>

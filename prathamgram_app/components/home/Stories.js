@@ -28,7 +28,7 @@ const Stories = () => {
                  ))}
                 
             </ScrollView>
-            <Text style={{color:'white'}}>Stories</Text>
+            <Text style={{color:'white'}}></Text>
         </View>
     );
 }
