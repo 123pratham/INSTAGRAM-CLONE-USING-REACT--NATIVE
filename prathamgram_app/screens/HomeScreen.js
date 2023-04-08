@@ -4,6 +4,7 @@ import Header from '../components/home/Header'
 import Stories from '../components/home/Stories'
 import Post from '../components/home/Post'
 import { POSTS } from '../data/Posts'
+import BottomTabs, { bottomTabIcons } from '../components/home/BottomTabs'
 
 
 const HomeScreen = () => {
@@ -17,6 +18,7 @@ const HomeScreen = () => {
             ))}
         
         </ScrollView>
+        <BottomTabs icons={bottomTabIcons}/>
      </SafeAreaView>
     
 )}

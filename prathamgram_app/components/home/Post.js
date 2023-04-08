@@ -8,23 +8,24 @@ import { Divider} from 'react-native-elements'
 const postFooterIcons = [
     {
         name : 'Like',
-        imageUrl: 'https://img.icons8.com/ios-glyphs/90/fa314a/like',
-        likedImageUrl: 'https://img.icons8.com/fluency-systems-regular/60/ffffff/like--v1.png',
+        imageUrl: 'https://img.icons8.com/fluency-systems-regular/60/ffffff/like--v1.png',
+        likedImageUrl: 'https://img.icons8.com/ios-glyphs/90/fa314a/like',
 
     },
     {
         name: 'Comment',
-        imageUrl:'https://img.icons8.com/ios-glyphs/90/fa314a/like',
+        imageUrl:'https://img.icons8.com/material-outlined/60/ffffff/filled-topic.png',
 
+      
     },
     {
         name: 'Share',
-        imageUrl: 'https://img.icons8.com/fluency-systems-regular/60/ffffff/like--v1.png',
+        imageUrl: 'https://img.icons8.com/fluency-systems-regular/60/ffffff/sent.png',
 
     },
     {
         name: 'Save',
-        imageUrl: '',
+        imageUrl:'https://img.icons8.com/fluency-systems-regular/60/ffffff/bookmark-ribbon--v1.png',
     },
 ]
 
@@ -38,9 +39,14 @@ const Post = ({post}) => {
             <View style={{marginHorizontal: 15, marginTop:10}}>
 
             <PostFooter />
+            <Likes post={post}/>
+            <Caption post={post}/>
+            <CommentsSection post={post} />
+            <Comments post={post}/>
             </View>
             
         </View>
+
     )
 }
 
@@ -86,19 +92,71 @@ const PostFooter = () => (
         <View style={styles.leftFooterIconsContainer}>
             <Icon imgStyle={styles.footerIcon} imgUrl={postFooterIcons[0].imageUrl}  />
             <Icon imgStyle={styles.footerIcon} imgUrl={postFooterIcons[1].imageUrl}  />
-            <Icon imgStyle={styles.footerIcon} imgUrl={postFooterIcons[2].imageUrl}  />
+            <Icon imgStyle={[styles.footerIcon,styles.shareIcon]} imgUrl={postFooterIcons[2].imageUrl}  />
+        </View>
+
+        <View style={{flex:1,alignItems: 'flex-end'}}>
+            <Icon imgStyle={styles.footerIcon} 
+            imgUrl={postFooterIcons[3].imageUrl} />
         </View>
     </View>
 )
 
 
-const Icon =  ({imgStyle, imgUrl}) => {
+const Icon =  ({imgStyle, imgUrl}) => (
     <TouchableOpacity>
         <Image style = {imgStyle} source={{uri: imgUrl}}/>
     </TouchableOpacity>
-} 
+)
 
+const Likes = ({post}) => (
+    <View style={{flexDirection: 'row',marginTop: 4}}>
+    <Text style={{color:'white', fontWeight:'600'}}>
+        {post.likes.toLocaleString('en')} likes
+    </Text>
+    </View>
+)
 
+const Caption = ({post}) =>(
+    <View style={{marginTop: 5}}>
+     <Text style={{color:'white'}}>
+    <Text style={{fontWeight:'600' }}>{post.user} </Text>
+    <Text> {post.caption}</Text>
+    
+    </Text> 
+    </View>
+)
+
+const CommentsSection = ({post}) => (
+   <View style={{marginTop:5}}> 
+   {!!post.comments.length && (
+    <Text style={{color:'gray'}}> 
+    View{post.comments.length >1 ? ' all' : ''} {post.comments.length}{' '}
+    {post.comments.length > 1 ? 'comments' : 'comment'}
+    
+    </Text>
+    )}
+    </View>
+)
+
+//A. 0 comments dont render component
+
+// B. 1 comments render component without all  and  singular  comment
+
+//  c. 2 comments render component with all and plural comments 
+
+const Comments = ({post}) =>(
+    <>
+    {post.comments.map((comment,index) => (
+        <View key={index} style={{flexDirection:'row',marginTop:5}}> 
+            <Text style={{color:'white'}}>
+                <Text style={{fontWeight:'600'}}>{Comments.user}</Text>{' '}
+                {comment.comment}
+            </Text>
+        </View>
+    ))}
+    </>
+)
 
 // define your styles
 const styles = StyleSheet.create({
@@ -113,13 +171,18 @@ const styles = StyleSheet.create({
     },
 
     footerIcon: {
-        width: 33,
-        height: 33,
+        width: 30,
+        height: 30,
+    },
+
+    shareIcon:{
+        transform:[{rotate:'320deg'}],
+        marginTop: -3,
     },
 
     leftFooterIconsContainer: {
         flexDirection: 'row',
-        width: '32%',
+        width: '33%',
         justifyContent: 'space-between',
     },
 

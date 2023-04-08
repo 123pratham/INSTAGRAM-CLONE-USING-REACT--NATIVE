@@ -21,6 +21,21 @@ export const POSTS=[
                 comment:
                 "Once i wake up, i'll finally be ready to code this uploadd."
             },
+            {
+                user:'Pratham.dev',
+                comment:
+                "Once i wake up, i'll finally be ready to code this uploadd."
+            },
+            {
+                user:'Pratham.dev',
+                comment:
+                "Once i wake up, i'll finally be ready to code this uploadd."
+            },
+            {
+                user:'Pratham.dev',
+                comment:
+                "Once i wake up, i'll finally be ready to code this uploadd."
+            },
         ],
     },
 
